@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: 'ModeloAPI_FastAPI Object Endpoints'
+  description: 'ModeloAPI_FastAPI Object Endpoints'
+  version: 1.0.0
+servers:
+  -
+    url: 'https://mvrggnzsm-2t9nlbg-yd0m3cg4.c360a.salesforce.com/api/v1/ingest/sources/ModeloAPI_FastAPI'
+paths:
+  /Cliente:
+    post:
+      summary: 'Upsert Cliente records'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data: {type: array, items: {$ref: '#/components/schemas/Cliente'}}
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: 'No Content'
+        '400':
+          description: 'Bad Request'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'Not Found'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: 'Delete Cliente records'
+      parameters:
+        -
+          in: query
+          name: ids
+          schema:
+            type: array
+            items:
+              oneOf:
+                - {type: string}
+                - {type: integer}
+            minItems: 1
+            maxItems: 200
+          examples:
+            integerIds:
+              value:
+                - 1
+                - 2
+                - 3
+              summary: 'Array of integer Ids'
+          required: true
+          style: form
+          explode: false
+          description: 'Id of Cliente'
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: 'Bad Request'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'Not Found'
+        '500':
+          description: 'Internal Server Error'
+  /Respuesta:
+    post:
+      summary: 'Upsert Respuesta records'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data: {type: array, items: {$ref: '#/components/schemas/Respuesta'}}
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: 'No Content'
+        '400':
+          description: 'Bad Request'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'Not Found'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: 'Delete Respuesta records'
+      parameters:
+        -
+          in: query
+          name: ids
+          schema:
+            type: array
+            items:
+              oneOf:
+                - {type: string}
+                - {type: integer}
+            minItems: 1
+            maxItems: 200
+          examples:
+            integerIds:
+              value:
+                - 1
+                - 2
+                - 3
+              summary: 'Array of integer Ids'
+          required: true
+          style: form
+          explode: false
+          description: 'Id of Respuesta'
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: 'Bad Request'
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'Not Found'
+        '500':
+          description: 'Internal Server Error'
+components:
+  schemas:
+    Cliente:
+      type: object
+      properties:
+        age:
+          type: number
+        balance:
+          type: number
+        campaign:
+          type: number
+    Respuesta:
+      type: object
+      properties:
+        probabilidad_si:
+          type: number

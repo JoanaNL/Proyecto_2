@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: API Modelo de Predicción
+  version: "1.0"
+  description: API que retorna la probabilitat de resposta d’un client a una campanya bancària
+
+servers:
+  - url: https://api-modelo-kbw3.onrender.com  # Canvia-ho pel teu domini real
+
+paths:
+  /predecir:
+    post:
+      summary: Predecir respuesta de cliente
+      operationId: predecirCliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '200':
+          description: Probabilitat retornada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Respuesta'
+        '400':
+          description: Error de validació
+        '500':
+          description: Error intern del servidor
+
+components:
+  schemas:
+    Cliente:
+      type: object
+      properties:
+        age:
+          type: integer
+          example: 35
+        balance:
+          type: number
+          format: float
+          example: 1500.5
+        campaign:
+          type: integer
+          example: 2
+      required:
+        - age
+        - balance
+        - campaign
+
+    Respuesta:
+      type: object
+      properties:
+        probabilidad_si:
+          type: number
+          format: float
+          example: 0.85

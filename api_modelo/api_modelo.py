@@ -19,7 +19,7 @@ class Cliente(BaseModel):
     age: int
     balance: float
     campaign: int
-
+    
 # Definir l'endpoint
 @app.post("/predecir")
 def predecir_endpoint(cliente: Cliente):
@@ -27,7 +27,7 @@ def predecir_endpoint(cliente: Cliente):
 
 def predecir(cliente: Cliente):
     # Convertir les dades a array per a predicció
-    datos = np.array([[cliente.age, cliente.balance, cliente.campaign]])
+    datos = np.array([[cliente.job, cliente.marital, cliente.eduation]])
     prob = model.predict_proba(datos)[0][1]
     return {"probabilidad_si": prob}
 
